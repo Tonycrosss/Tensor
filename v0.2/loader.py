@@ -1,4 +1,4 @@
-import urllib.request, re
+import urllib.request, re, os
 from bs4 import BeautifulSoup
 
 def parse_link(link):
@@ -23,11 +23,13 @@ def cleaner(dirty_text):
 def text_writer(clean_text):
     # TODO Имя файла должно быть как ссылка
     # TODO попробовать объеденить с форматтером
-    file = open('lenta.txt', 'w')
+    os.makedirs(re.sub(r'https://', '', user_link))
+    os.chdir(re.sub(r'https://', '', user_link))
+    file = open('temp.txt', 'w')
     file.write(clean_text)
 
 def formatter():
-    file = open('lenta.txt', 'r')
+    file = open('temp.txt', 'r')
     text = file.readlines()
     for line in text:
         spl_text = line.split(' ')
@@ -41,14 +43,15 @@ def formatter():
                 row = []
                 row.append(word)
         result.append(row)  # Цепляем последние слова, потому что до else не доходит
-        file = open('newnew', 'a', encoding='utf-8')
+        file = open('index.txt', 'a', encoding='utf-8')
         for row in result:
             file.write(str(' '.join(row) + '\n'))
+    os.remove('temp.txt')
 
 
 
-
-first_link = parse_link('https://lenta.ru/news/2016/12/30/otkaz/')
+user_link = 'https://lenta.ru/news/2016/12/30/otkaz/'
+first_link = parse_link(user_link)
 first_clear_text = cleaner(first_link)
 text_writer(first_clear_text)
 formatter()
