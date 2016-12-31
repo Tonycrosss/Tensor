@@ -22,8 +22,8 @@ def cleaner(dirty_text):
 def text_writer(clean_text):
     # TODO проверка на существование папки и не выдавать ошибку
     # TODO попробовать объеденить с форматтером
-    os.makedirs(re.sub(r'https://', '', user_link))
-    os.chdir(re.sub(r'https://', '', user_link))
+    os.makedirs(re.sub(r'http\S?://(www.)?', '', user_link))
+    os.chdir(re.sub(r'http\S?://(www.)?', '', user_link))
     file = open('temp.txt', 'w')
     file.write(clean_text)
 
@@ -49,7 +49,7 @@ def formatter():
 
 
 # TODO запуск из консоли ( пусть юзер вводит )
-user_link = 'https://lenta.ru/news/2016/12/30/otkaz/'
+user_link = 'https://lenta.ru/news/2016/12/31/braz_polic_ubil_grech_posla/'
 first_link = parse_link(user_link)
 first_clear_text = cleaner(first_link)
 text_writer(first_clear_text)
