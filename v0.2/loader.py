@@ -2,7 +2,6 @@ import urllib.request, re, os
 from bs4 import BeautifulSoup
 
 def parse_link(link):
-    # TODO нужно title еще прикрутить
     dirty_link = urllib.request.urlopen('{}'.format(link)).read()
     soup = BeautifulSoup(dirty_link, "lxml")
     text_title = soup.findAll('title') # Вытаскиваем заголовок
@@ -21,7 +20,7 @@ def cleaner(dirty_text):
     return clean_text4
 
 def text_writer(clean_text):
-    # TODO Имя файла должно быть как ссылка
+    # TODO проверка на существование папки и не выдавать ошибку
     # TODO попробовать объеденить с форматтером
     os.makedirs(re.sub(r'https://', '', user_link))
     os.chdir(re.sub(r'https://', '', user_link))
@@ -49,15 +48,15 @@ def formatter():
     os.remove('temp.txt')
 
 
-
+# TODO запуск из консоли ( пусть юзер вводит )
 user_link = 'https://lenta.ru/news/2016/12/30/otkaz/'
 first_link = parse_link(user_link)
 first_clear_text = cleaner(first_link)
 text_writer(first_clear_text)
 formatter()
 
-# TODO Удаление скаченного не формаченного файла в конце сеанса
-# в либреофис странно читается, в остальном везде гуд
+
+# TODO в либреофис странно читается, в остальном везде гуд
 
 
 
