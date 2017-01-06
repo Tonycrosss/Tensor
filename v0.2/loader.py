@@ -49,7 +49,7 @@ def formatter():
 
 
 # TODO запуск из консоли ( пусть юзер вводит )
-user_link = 'https://lenta.ru/news/2016/12/31/braz_polic_ubil_grech_posla/'
+user_link = 'https://lenta.ru/news/2016/12/30/5_pogobshih/'
 first_link = parse_link(user_link)
 first_clear_text = cleaner(first_link)
 text_writer(first_clear_text)
