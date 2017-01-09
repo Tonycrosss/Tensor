@@ -14,7 +14,7 @@ if __name__ == '__main__':
     print('Смотрим Вашу страницу... \n')
     tenslinker = tenslinker.TensLinker(user_link)  # Парсим ссылку
     clean_text = tenslinker.parse_link()  # получаем чистый текст
-    tenslinker.text_writer(clean_text)   # Создаем нужные папки и вписываем текст
+    tenslinker.text_writer(clean_text)   # Создаем папки и вписываем текст
     print('Программа выполнена!')
 
 
